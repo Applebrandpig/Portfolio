@@ -158,8 +158,8 @@
                 <p><i class="fa-solid fa-paper-plane"></i>aliaiham23@gmail.com</p>
                 <p><i class="fa-solid fa-phone"></i>+960 9299296</p>
             <div class="contact-right">
-                <form action="https://api.web3forms.com/submit" method="POST">
-                    <input type="hidden" name="access_key" value="#">
+                <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="7fd2921c-32e0-4285-b793-91591a2cfe42">
 
                     <input type="text" name="name" required  placeholder=" Your Name">
                     <input type="email" name="email" required placeholder="Your Email">
@@ -170,6 +170,10 @@
                     <Button type="submit" class="btn btn2">Submit</Button>
                 </form>
                 <span id="msg"></span>
+                <div id="toast" class="toast">
+                    Message sent successfully
+                    <button id="closeToast" class="close-btn">&times;</button>
+                </div>
             </div>
             </div>
     </div>
@@ -230,6 +234,42 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+
+// form submit stuff
+const form = document.getElementById('contactForm');
+const toast = document.getElementById('toast');
+const closeBtn = document.getElementById('closeToast');
+
+// Always attach the close event handler
+closeBtn.onclick = () => {
+  toast.classList.remove('show');
+};
+
+form.addEventListener('submit', async function (e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: formData
+    });
+
+    if (response.ok) {
+      form.reset();
+      toast.classList.add('show');
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    } else {
+      alert("There was an error sending the message.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong.");
+  }
+});
 </script>
 
     </body>

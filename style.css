@@ -388,6 +388,49 @@ nav .fa-solid{
     display: none;
 }
 
+.toast {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 16px;
+    border-radius: 5px;
+    z-index: 1000;
+    font-size: 1.1rem;
+  }
+  
+  .toast.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  
+  .toast.show.persistent {
+    animation: none;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    margin-left: 16px;
+    cursor: pointer;
+  }
+  
+  @keyframes fadeout {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; display: none; }
+  }
+  
+  
+
 /*-----------------------CSS for Small Screen-----------------------*/
 @media only screen and (max-width: 600px){
     .header-text{
@@ -499,6 +542,11 @@ nav .fa-solid{
     background-color: #84a4fc;
   }
 
+.toast {
+    width: 90%;
+    top: 70px;
+    transform: translateX(-50%);
+}
 
 
     
