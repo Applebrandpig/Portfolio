@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aiham's Workspace</title>
+
+    <link rel="stylesheet" href="illustrations.css">
+    <script src="https://kit.fontawesome.com/7011199592.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <nav class="navbar">
+        <a href=#header><img src="images/logo.png" class="logo"></a>
+        <ul id="sidemenu">
+            <li><a href="index.html">Home</a></li>
+            <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+        </ul>
+        <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+    </nav>
+
+    <section id="artworks" class="artworks">
+        <div class="gallery">
+            <img src="/socialmediaposts/post1.jpg" alt="A2" data-src="/socialmediaposts/post1.jpg">
+            <img src="/socialmediaposts/post2.png" alt="A1" data-src="/socialmediaposts/post2.png">
+            <img src="/socialmediaposts/post1.jpg" alt="A2" data-src="/socialmediaposts/post1.jpg">
+            <img src="/socialmediaposts/post2.png" alt="A1" data-src="/socialmediaposts/post2.png">
+            <img src="/socialmediaposts/post1.jpg" alt="A2" data-src="/socialmediaposts/post1.jpg">
+            <img src="/socialmediaposts/post2.png" alt="A1" data-src="/socialmediaposts/post2.png">
+            <img src="/socialmediaposts/post1.jpg" alt="A2" data-src="/socialmediaposts/post1.jpg">
+            <img src="/socialmediaposts/post2.png" alt="A1" data-src="/socialmediaposts/post2.png">
+            <img src="/socialmediaposts/post1.jpg" alt="A2" data-src="/socialmediaposts/post1.jpg">
+            <img src="/socialmediaposts/post2.png" alt="A1" data-src="/socialmediaposts/post2.png">
+            <img src="/socialmediaposts/post1.jpg" alt="A2" data-src="/socialmediaposts/post1.jpg">
+            <img src="/socialmediaposts/post2.png" alt="A1" data-src="/socialmediaposts/post2.png">
+        </div>
+    </section>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img id="lightbox-img">
+        <div class="nav prev" id="prev">&#10094;</div>
+        <div class="nav next" id="next">&#10095;</div>
+    </div>
+
+    <script>
+        const images = document.querySelectorAll('.gallery img');
+        const lightbox = document.createElement('div');
+        lightbox.classList.add('lightbox');
+        document.body.appendChild(lightbox);
+
+        const lightboxImg = document.createElement('img');
+        lightbox.appendChild(lightboxImg);
+
+        const closeBtn = document.createElement('span');
+        closeBtn.innerHTML = '&times;';
+        closeBtn.classList.add('close');
+        lightbox.appendChild(closeBtn);
+
+        const prevBtn = document.createElement('span');
+        prevBtn.innerHTML = '&#10094;';
+        prevBtn.classList.add('nav', 'prev');
+        lightbox.appendChild(prevBtn);
+
+        const nextBtn = document.createElement('span');
+        nextBtn.innerHTML = '&#10095;';
+        nextBtn.classList.add('nav', 'next');
+        lightbox.appendChild(nextBtn);
+
+        let currentIndex = 0;
+
+        function showImage(index) {
+            if (index < 0) index = images.length - 1;
+            if (index >= images.length) index = 0;
+            
+            lightboxImg.style.opacity = '0'; // Start fade out
+            setTimeout(() => {
+                lightboxImg.src = images[index].src;
+                lightboxImg.classList.add('active');
+                lightboxImg.style.opacity = '1'; // Fade in effect
+            }, 300); // Delay before switching image
+
+            currentIndex = index;
+        }
+
+        images.forEach((image, index) => {
+            image.addEventListener('click', () => {
+                lightbox.style.display = 'flex';
+                showImage(index);
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+        prevBtn.addEventListener('click', () => {
+            showImage(currentIndex - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            showImage(currentIndex + 1);
+        });
+    </script>
+</body>
+</html>
